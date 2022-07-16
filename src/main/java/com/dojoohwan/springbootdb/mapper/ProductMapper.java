@@ -9,4 +9,5 @@ import com.dojoohwan.springbootdb.model.Product;
 @Mapper
 public interface ProductMapper {
     List<Product> selectList();
+    List<Product> getMinallCate();
 }

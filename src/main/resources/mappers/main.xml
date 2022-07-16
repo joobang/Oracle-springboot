@@ -11,4 +11,29 @@ PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
             ,price
           FROM product
     </select>
+
+    <select id="getMinallCate" parameterType="com.dojoohwan.springbootdb.model.Product" resultType="com.dojoohwan.springbootdb.model.Product">
+    SELECT 
+	    category
+	    ,brand
+	    ,price
+    FROM
+	    (SELECT 
+		    b.category,
+		    a.brand,
+		    b.price,
+		    ROW_NUMBER() OVER(PARTITION BY b.category ORDER BY a.brand) AS rn
+	    FROM 
+		    PRODUCT a,
+		    (SELECT 
+			    category,
+			    MIN(price) AS price
+		    FROM PRODUCT
+		    GROUP BY category
+		    ) b
+	    WHERE a.category = b.category
+		    AND a.price = b.price
+	    )
+    WHERE rn = 1
+    </select>
 </mapper>

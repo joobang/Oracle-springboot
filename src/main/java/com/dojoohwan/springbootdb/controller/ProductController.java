@@ -7,22 +7,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dojoohwan.springbootdb.model.MinallCate;
 import com.dojoohwan.springbootdb.model.Product;
 import com.dojoohwan.springbootdb.service.ProductService;
+import com.google.gson.Gson;
 
 @RestController
 public class ProductController {
+    
 
     @Autowired
     ProductService productService;
 
-    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
     public List<Product> getSelecList() {
         List<Product> list = productService.selecList();
         return list;
     }
-    // @RequestMapping(value = "/", method = RequestMethod.GET)
-    // public String index() {
-    //     return "Hello, World!";
-    // }
+    
+    @RequestMapping(value = "/product/all/min", method = RequestMethod.GET)
+    public String getMinallCate() {
+        Gson gson = new Gson();
+        MinallCate minall = new MinallCate();
+        List<Product> list = productService.getMinallCate();
+        int sum = list.stream().mapToInt(l -> l.getPrice()).sum();
+        
+        minall.setProductList(list);
+        minall.setSum(sum);
+        return gson.toJson(minall);
+    }
 }
