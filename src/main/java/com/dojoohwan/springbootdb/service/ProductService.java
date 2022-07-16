@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.dojoohwan.springbootdb.mapper.ProductMapper;
 import com.dojoohwan.springbootdb.model.MinallBrand;
+import com.dojoohwan.springbootdb.model.MinmaxCate;
 import com.dojoohwan.springbootdb.model.Product;
-import com.google.gson.Gson;
 
 @Service
 public class ProductService {
@@ -27,5 +27,9 @@ public class ProductService {
 
     public MinallBrand getMinallBrand() {
         return productMapper.getMinallBrand();
+    }
+
+    public MinmaxCate getCateMinMax(String cate) {
+        return productMapper.getCateMinMax(cate);
     }
 }

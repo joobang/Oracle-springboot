@@ -37,6 +37,26 @@ PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
     WHERE rn = 1
     </select>
 
+	<select id="getCateMinMax" parameterType="com.dojoohwan.springbootdb.model.Product" resultType="com.dojoohwan.springbootdb.model.MinmaxCate">
+    SELECT 
+		a.category,
+		MAX(DECODE(a.price, b.min_price, a.brand)) min_brand,
+		MAX(DECODE(a.price, b.max_price, a.brand)) max_brand,
+		MAX(DECODE(a.price, b.min_price, a.price)) min_price,
+		MAX(DECODE(a.price, b.max_price, a.price)) max_price
+	FROM product a,
+		(SELECT
+			category,
+			MIN(price) AS min_price,
+			MAX(price) AS max_price
+		FROM product
+		GROUP BY category
+		) b
+	WHERE a.category = #{cate}
+		AND (a.price = b.min_price OR a.price = b.max_price)
+	GROUP BY a.category
+    </select>
+
 	<select id="getMinallBrand" parameterType="com.dojoohwan.springbootdb.model.Product" resultType="com.dojoohwan.springbootdb.model.MinallBrand">
     SELECT 
 		a.brand,
