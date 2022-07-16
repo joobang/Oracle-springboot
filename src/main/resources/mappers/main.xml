@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dojoohwan.springbootdb.mapper.ProductMapper">
+    <select id="selectList" parameterType="com.dojoohwan.springbootdb.model.Product" resultType="com.dojoohwan.springbootdb.model.Product">
+        SELECT category
+            ,brand
+            ,price
+          FROM product
+    </select>
+</mapper>
