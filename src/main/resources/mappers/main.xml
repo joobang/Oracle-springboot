@@ -80,4 +80,31 @@ PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
 				   			)
 						)
     </select>
+
+	<select id="selectProduct" parameterType="com.dojoohwan.springbootdb.model.Product" resultType="com.dojoohwan.springbootdb.model.Product">
+	SELECT category
+            ,brand
+            ,price
+    FROM product
+	WHERE category = #{category}
+		AND brand = #{brand}
+
+    </select>
+
+	<select id="insert" parameterType="com.dojoohwan.springbootdb.model.Product" >
+	INSERT INTO PRODUCT values(TMP_KEY.nextval, #{category},#{brand},#{price})
+    </select>
+
+	<select id="update" parameterType="com.dojoohwan.springbootdb.model.Product" >
+	UPDATE product
+	SET price = #{price}
+	WHERE category = #{category}
+		AND brand = #{brand}
+    </select>
+
+	<select id="delete" parameterType="com.dojoohwan.springbootdb.model.Product" >
+	DELETE product
+	WHERE category = #{category}
+		AND brand = #{brand}
+    </select>
 </mapper>

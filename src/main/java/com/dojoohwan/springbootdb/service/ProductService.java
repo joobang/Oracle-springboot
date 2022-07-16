@@ -17,7 +17,7 @@ public class ProductService {
     @Autowired
     ProductMapper productMapper;
 
-    public List<Product> selecList() {
+    public List<Product> selectList() {
         return productMapper.selectList();
     }
 
@@ -31,5 +31,33 @@ public class ProductService {
 
     public MinmaxCate getCateMinMax(String cate) {
         return productMapper.getCateMinMax(cate);
+    }
+    public Product selectProduct(Product product) {
+        return productMapper.selectProduct(product);
+    }
+    public void insertProduct(Product product) {
+        Product curr = productMapper.selectProduct(product);
+        if(curr == null){
+            productMapper.insert(product);
+        }else{
+            throw new IllegalStateException("product already exist.");
+        }
+        
+    }
+    public void updateProdct(Product product) {
+        Product curr = productMapper.selectProduct(product);
+        if(curr != null){
+            curr.setPrice(product.getPrice());
+            productMapper.update(product);
+        }else{
+            throw new IllegalStateException("product does not exist.");
+        }
+    }
+    public void deleteProdcut(Product product) {
+        if(productMapper.selectProduct(product) != null){
+            productMapper.delete(product);
+        }else{
+            throw new IllegalStateException("product does not exist.");
+        }
     }
 }

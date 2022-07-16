@@ -15,4 +15,8 @@ public interface ProductMapper {
     List<Product> getMinallCate();
     MinallBrand getMinallBrand();
     MinmaxCate getCateMinMax(@Param("cate") String cate);
+    Product selectProduct(Product product);
+    void insert(Product product);
+    void update(Product product);
+    void delete(Product product);
 }
