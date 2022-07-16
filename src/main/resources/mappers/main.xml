@@ -36,4 +36,28 @@ PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
 	    )
     WHERE rn = 1
     </select>
+
+	<select id="getMinallBrand" parameterType="com.dojoohwan.springbootdb.model.Product" resultType="com.dojoohwan.springbootdb.model.MinallBrand">
+    SELECT 
+		a.brand,
+		a.t_price
+	FROM
+		(SELECT
+			brand,
+			SUM(price) AS t_price
+		FROM
+			product
+		GROUP BY brand
+		) a
+	WHERE a.t_price = (SELECT
+							MIN(t_price) AS t_price_min
+				   	   FROM	
+				   			(SELECT
+				   				brand,
+				   				SUM(price) AS t_price
+				   			FROM product
+				   			GROUP BY brand
+				   			)
+						)
+    </select>
 </mapper>

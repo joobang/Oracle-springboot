@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dojoohwan.springbootdb.mapper.ProductMapper;
+import com.dojoohwan.springbootdb.model.MinallBrand;
 import com.dojoohwan.springbootdb.model.Product;
 import com.google.gson.Gson;
 
@@ -22,5 +23,9 @@ public class ProductService {
 
     public List<Product> getMinallCate() {
         return productMapper.getMinallCate();
+    }
+
+    public MinallBrand getMinallBrand() {
+        return productMapper.getMinallBrand();
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dojoohwan.springbootdb.model.MinallBrand;
 import com.dojoohwan.springbootdb.model.MinallCate;
 import com.dojoohwan.springbootdb.model.Product;
 import com.dojoohwan.springbootdb.service.ProductService;
@@ -24,8 +25,8 @@ public class ProductController {
         List<Product> list = productService.selecList();
         return list;
     }
-    
-    @RequestMapping(value = "/product/all/min", method = RequestMethod.GET)
+    // 1. 모든 카테고리의 상품 구매할 때 최저가 조회 API
+    @RequestMapping(value = "/product/all/all/min", method = RequestMethod.GET)
     public String getMinallCate() {
         Gson gson = new Gson();
         MinallCate minall = new MinallCate();
@@ -36,4 +37,11 @@ public class ProductController {
         minall.setSum(sum);
         return gson.toJson(minall);
     }
+
+    // 2. 한 브랜드에서 모든 카테고리 상품 구매할 경우 최저가 및 브랜드 조회 API
+    @RequestMapping(value = "/product/all/brand/min", method = RequestMethod.GET)
+    public MinallBrand getBrandallmin() {
+       return productService.getMinallBrand();
+    }
+    
 }

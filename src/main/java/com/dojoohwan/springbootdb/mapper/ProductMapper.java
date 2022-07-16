@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.dojoohwan.springbootdb.model.MinallBrand;
 import com.dojoohwan.springbootdb.model.Product;
 
 @Mapper
 public interface ProductMapper {
     List<Product> selectList();
     List<Product> getMinallCate();
+    MinallBrand getMinallBrand();
 }
