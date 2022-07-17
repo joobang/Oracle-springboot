@@ -74,9 +74,11 @@ PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
 				   	   FROM	
 				   			(SELECT
 				   				brand,
-				   				SUM(price) AS t_price
+				   				SUM(price) AS t_price,
+								COUNT(*)
 				   			FROM product
 				   			GROUP BY brand
+							HAVING COUNT(*) = 8
 				   			)
 						)
     </select>
